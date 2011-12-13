@@ -1,7 +1,6 @@
 #define write ye_olde_write
 #include <unistd.h>
 #include <string.h>
-#include <alloca.h>
 
 #include <dlfcn.h>
 
@@ -36,7 +35,7 @@ int write(int fd, const void* buf, int count) {
   if (fd == 2 && isatty(2)) {
     /* Do crazy nonsense to buf and count */
     int new_count = count + STDERR_COLOR_SIZE + COL_RESET_SIZE;
-    void * new_buf = alloca(new_count);
+	char new_buf[new_count];
     memcpy(new_buf, STDERR_COLOR, STDERR_COLOR_SIZE);
     memcpy(new_buf + STDERR_COLOR_SIZE, buf, count);
     memcpy(new_buf + STDERR_COLOR_SIZE + count, COL_RESET, COL_RESET_SIZE);
