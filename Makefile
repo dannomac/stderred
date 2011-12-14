@@ -1,4 +1,4 @@
-LDFLAGS=-shared
+LDFLAGS=-shared -ldl
 
 lib/stderred.so: stderred.c
 	gcc stderred.c -D_GNU_SOURCE -std=gnu99 -Wall -fPIC -m32 $(LDFLAGS) -o lib/stderred.so
